@@ -8,9 +8,7 @@ class Person
 
   # Getters
   attr_accessor :name
-
   attr_accessor :age
-
   attr_accessor :id
 
   Private def of_age
