@@ -11,6 +11,8 @@ class Person
 
   attr_accessor :age
 
+  attr_accessor :id
+
   Private def of_age
     @age >= 18
   end
