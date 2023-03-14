@@ -11,7 +11,7 @@ class Person
 
   attr_accessor :age
 
-  Private def of_age
+  private def of_age
     @age >= 18
   end
   def can_use_services
