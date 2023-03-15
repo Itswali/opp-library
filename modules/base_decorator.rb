@@ -1,5 +1,5 @@
-require '../library'
-require './modules/nameable'
+require_relative '../library'
+require_relative './nameable'
 class BaseDecorator < Nameable
   attr_accessor :nameable
 
