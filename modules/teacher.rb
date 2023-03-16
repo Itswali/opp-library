@@ -1,4 +1,4 @@
-require '../library'
+require '../person'
 class Teacher < Person
   def initialize(name, age, parent_permission, specialization)
     super(name, age, parent_permission)
