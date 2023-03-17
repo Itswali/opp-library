@@ -115,3 +115,7 @@ class Main
     @my_app.create_rental(book_index, person_index, date)
   end
 end
+
+app = Main.new
+
+app.run
