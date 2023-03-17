@@ -114,8 +114,13 @@ class Main
     date = Date.parse(date_input)
     @my_app.create_rental(book_index, person_index, date)
   end
+
+  def handle_list_rentals
+    print 'ID of person: '
+    person_id = gets.chomp.to_i
+    @my_app.list_rentals(person_id)
+  end
 end
 
-app = Main.new
-
-app.run
+main = Main.new
+main.run
