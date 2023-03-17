@@ -48,9 +48,9 @@ class App
       puts "          Age:  #{person.age}"
       puts "          Specialization:  #{person.specialization}"
       puts "          Parent Permission:  #{person.parent_permission}"
+      puts 'Teacher created succesfully'
     end
     @people << person
-    puts 'person created succesfully'
   end
 
   def create_book(title, author)
