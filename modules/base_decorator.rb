@@ -1,4 +1,4 @@
-require_relative '../library'
+require_relative '../person'
 require_relative './nameable'
 class BaseDecorator < Nameable
   attr_accessor :nameable
@@ -9,6 +9,6 @@ class BaseDecorator < Nameable
   end
 
   def correct_name
-    @nameable
+    @nameable.correct_name
   end
 end

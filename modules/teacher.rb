@@ -1,11 +1,11 @@
-require '../library'
+require '../person'
 class Teacher < Person
-  def initialize(name, age, parent_permission, specialization)
-    super(name, age, parent_permission)
+  def initialize(age, specialization, name = 'unknown')
+    super
     @specialization = specialization
   end
 
-  def can_use_services
+  def can_use_service?
     true
   end
 end
