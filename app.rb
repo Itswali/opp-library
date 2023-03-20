@@ -70,7 +70,7 @@ class App
     puts 'Rental Created.'
   end
 
-  def list_rentals(_id)
+  def list_rentals(person_id)
     puts 'Rentals:'
     @rentals.each do |rental|
       if rental.person.id == person_id
