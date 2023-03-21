@@ -1,4 +1,5 @@
 require_relative '../person'
+
 class Teacher < Person
   attr_accessor :specialization
   attr_reader :parent_permission
@@ -12,5 +13,15 @@ class Teacher < Person
   # rubocop:enable Style/OptionalBooleanParameter
   def can_use_services
     true
+  end
+
+  def to_hash
+    {
+      id: id,
+      age: age,
+      name: name,
+      parent_permission: parent_permission,
+      specialization: specialization
+    }
   end
 end

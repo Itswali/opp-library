@@ -5,19 +5,25 @@ class Rental
   attr_accessor :date
   attr_reader :book, :person
 
-  def initialize(date, book, person)
+  def initialize(date, _book, _person)
     @date = date
-    @book = book
-    @person = person
   end
 
   def book=(book)
     @book = book
-    book.rentals.push(self) unless book.rentals.include?(self)
+    book.add_rental(self) unless book.rentals.include?(self)
   end
 
   def person=(person)
     @person = person
-    person.rentals.push(self) unless person.rentals.include?(self)
+    person.add_rentals
+  end
+
+  def to_hash
+    {
+      date: date,
+      book: book,
+      person: person
+    }
   end
 end

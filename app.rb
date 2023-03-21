@@ -4,6 +4,7 @@ require_relative './person'
 require_relative './modules/student'
 require_relative './modules/classroom'
 require_relative './modules/teacher'
+require 'json'
 
 class App
   attr_reader :people, :books, :rentals
@@ -12,6 +13,14 @@ class App
     @people = []
     @books = []
     @rentals = []
+    load_data
+  end
+
+  # load data
+  def load_data
+    @people = read_json_file('./modules/people.json', Person)
+    @books = read_json_file('./modules/books.json', Book)
+    @rentals = read_json_file('./modules/rentals.json', Rental)
   end
 
   def list_books
@@ -48,7 +57,7 @@ class App
       puts "          Age:  #{person.age}"
       puts "          Specialization:  #{person.specialization}"
       puts "          Parent Permission:  #{person.parent_permission}"
-      puts 'Teacher created succesfully'
+      puts 'person created succesfully'
     end
     @people << person
   end
@@ -91,6 +100,40 @@ class App
       when Teacher
         puts "#{index}) [Teacher] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
       end
+    end
+  end
+
+  def save_data
+    all_data = [@people, @books, @rentals]
+    file_paths = ['./modules/people.json', './modules/books.json', './modules/rentals.json']
+
+    # Iterate on both arrays
+    all_data.zip(file_paths).each do |data, file_path|
+      saver = JsonHandler.new(data, file_path)
+      saver.save
+    end
+  end
+end
+
+# Create a new instance of JsonHandler to handle all the data
+class JsonHandler
+  def initialize(data, file_path)
+    @data = data
+    @file_path = file_path
+  end
+
+  def save
+    # format the data
+    opts = {
+      array_nl: "\n",
+      object_nl: "\n",
+      indent: '  ',
+      space_before: ' ',
+      space: ' '
+    }
+    # creates the files if doesnt exits and writes on them.
+    File.open(@file_path, 'a') do |file|
+      file.write(JSON.pretty_generate(@data.map(&:to_hash), opts))
     end
   end
 end
