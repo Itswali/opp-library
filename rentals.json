@@ -1,1 +1,1 @@
-[]
+[{"json_class":"Rental","date":"2023-03-04","person":{"json_class":"Student","id":"b45c85bc-48ef-47ff-8209-5ce7f7f5638c","name":"wali","age":19,"parent_permission":true},"book":{"json_class":"Book","title":"Habits","author":"king"}}]
