@@ -1,4 +1,3 @@
-
 module Menu
   def menu
     puts ''
