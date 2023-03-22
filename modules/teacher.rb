@@ -1,27 +1,15 @@
 require_relative '../person'
+require 'securerandom'
 
 class Teacher < Person
-  attr_accessor :specialization
-  attr_reader :parent_permission
+  attr_reader :specialization
 
-  # rubocop:disable Style/OptionalBooleanParameter
-  def initialize(age, name = 'Unkown', specialization = nil, parent_permission = true)
-    super(name, age, parent_permission)
+  def initialize(age, specialization, name = 'Unknown', id = SecureRandom.uuid, parent_permission: true)
+    super(age, id, name, parent_permission: parent_permission)
     @specialization = specialization
   end
 
-  # rubocop:enable Style/OptionalBooleanParameter
-  def can_use_services
+  def can_use_services?
     true
-  end
-
-  def to_hash
-    {
-      id: id,
-      age: age,
-      name: name,
-      parent_permission: parent_permission,
-      specialization: specialization
-    }
   end
 end

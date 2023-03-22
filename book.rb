@@ -1,7 +1,9 @@
 require_relative './modules/rental'
+require 'date'
 
 class Book
-  attr_accessor :title, :author, :rentals
+  attr_accessor :title, :author
+  attr_reader :rentals
 
   def initialize(title, author)
     @title = title
@@ -9,15 +11,15 @@ class Book
     @rentals = []
   end
 
-  def add_rental(rental)
-    @rentals << rental
+  def add_rental(person, date)
+    @rentals.push(Rental.new(date, person, self))
   end
 
-  # hashing
-  def to_hash
+  def to_json(*args)
     {
-      title: title,
-      author: author
-    }
+      JSON.create_id => self.class.name,
+      'title' => title,
+      'author' => author
+    }.to_json(*args)
   end
 end

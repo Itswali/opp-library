@@ -1,32 +1,20 @@
 require_relative '../person'
-require_relative './classroom'
+require 'securerandom'
 
 class Student < Person
-  attr_accessor :classroom
-  attr_reader :parent_permission
+  attr_reader :classroom
 
-  # rubocop:disable Style/OptionalBooleanParameter
-  def initialize(age, name = 'Unkown', parent_permission = true)
-    super(age, name, parent_permission)
-    @classroom = classroom
+  def initialize(age, name = 'Unknown', id = SecureRandom.uuid, parent_permission: true)
+    super(age, id, name, parent_permission: parent_permission)
+    @classroom = nil
   end
 
-  # rubocop:enable Style/OptionalBooleanParameter
+  def classroom=(classroom)
+    @classroom = classroom
+    classroom.students << self unless classroom.students.include?(self)
+  end
+
   def play_hooky
     '¯\(ツ)/¯'
-  end
-
-  def add_to_classroom(classroom)
-    @classroom = classroom
-    classroom.students.push(self) unless classroom.students.include?(self)
-  end
-
-  def to_hash
-    {
-      id: id,
-      age: age,
-      name: name,
-      parent_permission: parent_permission
-    }
   end
 end

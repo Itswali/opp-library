@@ -2,28 +2,22 @@ require_relative '../person'
 require_relative '../book'
 
 class Rental
-  attr_accessor :date
-  attr_reader :book, :person
+  attr_accessor :date, :person, :book
 
-  def initialize(date, _book, _person)
+  def initialize(date, person, book)
     @date = date
-  end
-
-  def book=(book)
-    @book = book
-    book.add_rental(self) unless book.rentals.include?(self)
-  end
-
-  def person=(person)
     @person = person
-    person.add_rentals
+    person.rentals << self unless person.rentals.include?(self)
+    @book = book
+    book.rentals << self unless book.rentals.include?(self)
   end
 
-  def to_hash
+  def to_json(*args)
     {
-      date: date,
-      book: book,
-      person: person
-    }
+      JSON.create_id => self.class.name,
+      'date' => date,
+      'person' => person,
+      'book' => book
+    }.to_json(*args)
   end
 end
