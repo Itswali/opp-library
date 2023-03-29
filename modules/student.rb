@@ -4,12 +4,19 @@ require 'securerandom'
 class Student < Person
   attr_reader :classroom
 
+
   def initialize(age, name = 'Unknown', id = SecureRandom.uuid, parent_permission: true)
     super(age, id, name, parent_permission: parent_permission)
     @classroom = nil
   end
 
   def classroom=(classroom)
+
+  # rubocop:disable Style/OptionalBooleanParameter
+  def initialize(age, name = 'Unkown', parent_permission = true)
+  def initialize(age, name = 'Unknown', parent_permission: true)
+    super(age, name, parent_permission)
+
     @classroom = classroom
     classroom.students << self unless classroom.students.include?(self)
   end
